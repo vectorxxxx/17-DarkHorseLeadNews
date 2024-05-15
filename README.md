@@ -205,3 +205,38 @@ docker run \
 # 重新加载配置文件
 docker exec nginx  nginx -s reload
 ```
+
+### 1.6、安装 MinIO
+
+```bash
+# 拉取镜像
+docker pull quay.io/minio/minio
+
+# 创建数据存储目录
+mkdir -p /usr/local/src/minio/data1
+mkdir -p /usr/local/src/minio/data2
+mkdir -p /usr/local/src/minio/data3
+mkdir -p /usr/local/src/minio/data4
+
+# 创建minio
+docker run -d \
+--name minio \
+-p 9000:9000 \
+-p 9001:9001 \
+-v /usr/local/src/minio/data1:/data1 \
+-v /usr/local/src/minio/data2:/data2 \
+-v /usr/local/src/minio/data3:/data3 \
+-v /usr/local/src/minio/data4:/data4 \
+-e "MINIO_ROOT_USER=minioadmin" \
+-e "MINIO_ROOT_PASSWORD=minioadmin" \
+--restart=always \
+quay.io/minio/minio \
+server /data1 /data2 /data3 /data4 \
+--console-address ":9000" \
+--address ":9001"
+```
+
+访问: [http://192.168.56.17:9001/](http://192.168.56.17:9001/)
+
+- 账号：minioadmin
+- 密码：minioadmin

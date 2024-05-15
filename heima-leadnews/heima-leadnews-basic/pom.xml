@@ -9,11 +9,10 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>heima-leadnews-test</artifactId>
+    <artifactId>heima-leadnews-basic</artifactId>
     <packaging>pom</packaging>
     <modules>
-        <module>freemarker-demo</module>
-        <module>minio-demo</module>
+        <module>heima-file-starter</module>
     </modules>
 
     <properties>

@@ -1,0 +1,6 @@
+minio:
+  accessKey: minioadmin
+  secretKey: minioadmin
+  bucket: leadnews
+  endpoint: http://192.168.56.17:9001
+  readPath: http://192.168.56.17:9001
