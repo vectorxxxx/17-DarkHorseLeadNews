@@ -255,7 +255,6 @@ touch /usr/local/src/redis/conf/redis.conf
 docker run \
 --name redis \
 --restart=always \
-
 -p 6379:6379 \
 -v /usr/local/src/redis/data:/data \
 -v /usr/local/src/redis/conf/redis.conf:/etc/redis/redis.conf \
@@ -274,4 +273,31 @@ appendonly yes
 requirepass leadnews
 ```
 
-### 
+### 1.8、安装 Zookeeper
+
+```bash
+docker pull zookeeper:3.4.14
+
+docker run -d --name zookeeper \
+--restart=always \
+-p 2181:2181 \
+zookeeper:3.4.14
+```
+
+### 1.9、安装 Kafka
+
+```bash
+docker pull wurstmeister/kafka:2.12-2.3.1
+
+docker run -d --name kafka \
+-p 9092:9092 \
+--env KAFKA_ADVERTISED_HOST_NAME=192.168.56.17 \
+--env KAFKA_ZOOKEEPER_CONNECT=192.168.56.17:2181 \
+--env KAFKA_ADVERTISED_LISTENERS=PLAINTEXT://192.168.56.17:9092 \
+--env KAFKA_LISTENERS=PLAINTEXT://0.0.0.0:9092 \
+--env KAFKA_HEAP_OPTS="-Xmx256M -Xms256M" \
+wurstmeister/kafka:2.12-2.3.1
+
+wurstmeister/kafka
+```
+

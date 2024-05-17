@@ -16,6 +16,7 @@
         <module>minio-demo</module>
         <module>tess4j-demo</module>
         <module>delayed-demo</module>
+        <module>kafka-demo</module>
     </modules>
 
     <properties>
