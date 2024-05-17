@@ -22,11 +22,9 @@ public class SensitiveWordUtil
         // map初始长度words.size()，整个字典库的入口字数(小于words.size()，因为不同的词可能会有相同的首字)
         Map<String, Object> map = new HashMap<>(words.size());
         // 遍历过程中当前层次的数据
-        Map<String, Object> curMap = null;
-        Iterator<String> iterator = words.iterator();
+        Map<String, Object> curMap;
 
-        while (iterator.hasNext()) {
-            String word = iterator.next();
+        for (String word : words) {
             curMap = map;
             int len = word.length();
             for (int i = 0; i < len; i++) {
