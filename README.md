@@ -240,3 +240,38 @@ server /data1 /data2 /data3 /data4 \
 
 - 账号：minioadmin
 - 密码：minioadmin
+
+### 1.7、安装 Redis
+
+```bash
+# 下载镜像文件
+docker pull redis
+
+# 创建配置文件
+mkdir -p /usr/local/src/redis/conf
+touch /usr/local/src/redis/conf/redis.conf
+
+# 创建实例并启动
+docker run \
+--name redis \
+--restart=always \
+
+-p 6379:6379 \
+-v /usr/local/src/redis/data:/data \
+-v /usr/local/src/redis/conf/redis.conf:/etc/redis/redis.conf \
+-d redis \
+redis-server /etc/redis/redis.conf
+
+# 查看 redis 版本
+docker exec -it redis redis-server -v
+
+# 使用 redis 镜像执行 redis-cli 命令连接
+docker exec -it redis redis-cli
+
+# 默认存储在内存中，需要修改为持久化方式
+vi /usr/local/src/redis/conf/redis.conf
+appendonly yes
+requirepass leadnews
+```
+
+### 
