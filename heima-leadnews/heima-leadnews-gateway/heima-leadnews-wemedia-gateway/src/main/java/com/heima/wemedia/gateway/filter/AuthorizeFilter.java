@@ -70,6 +70,8 @@ public class AuthorizeFilter implements Ordered, GlobalFilter
         }
         catch (Exception e) {
             e.printStackTrace();
+            response.setStatusCode(HttpStatus.UNAUTHORIZED);
+            return response.setComplete();
         }
 
         //6.放行

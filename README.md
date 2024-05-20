@@ -301,3 +301,179 @@ wurstmeister/kafka:2.12-2.3.1
 wurstmeister/kafka
 ```
 
+### 1.10、安装 ElasticSearch
+
+```bash
+# 下载镜像文件
+docker pull elasticsearch:7.4.2
+
+# 初始化配置
+mkdir -p /usr/local/src/elasticsearch/config
+mkdir -p /usr/local/src/elasticsearch/data
+# 允许被所有IP来源的机器访问
+echo "http.host: 0.0.0.0" >> /usr/local/src/elasticsearch/config/elasticsearch.yml
+# 递归更改权限
+chmod -R 777 /usr/local/src/elasticsearch/
+
+# 运行 elasticsearch 镜像实例
+# 测试环境下，必须设置ES的初始内存和最大内存，否则默认占用内存过大会启动不了ES
+docker run \
+--name elasticsearch \
+--restart=always \
+-p 9200:9200 -p 9300:9300 \
+-e "discovery.type=single-node" \
+-e ES_JAVA_OPTS="-Xms64m -Xmx512m" \
+-v /usr/local/src/elasticsearch/config/elasticsearch.yml:/usr/share/elasticsearch/config/elasticsearch.yml \
+-v /usr/local/src/elasticsearch/data:/usr/share/elasticsearch/data \
+-v /usr/local/src/elasticsearch/plugins:/usr/share/elasticsearch/plugins \
+-d elasticsearch:7.4.2
+
+# 查看启动日志
+docker logs elasticsearch
+```
+
+访问验证：[http://192.168.56.17:9200](http://192.168.56.17:9200)
+
+### 1.11、安装 Kibana
+
+```bash
+# 下载镜像文件
+docker pull kibana:7.4.2
+
+# 运行 kibana 镜像实例
+docker run \
+--name kibana \
+--restart=always \
+-p 5601:5601 \
+-e ELASTICSEARCH_HOSTS=http://192.168.56.17:9200 \
+-d kibana:7.4.2
+
+# 查看启动日志
+docker logs kibana
+```
+
+访问验证：[http://192.168.56.17:5601](http://192.168.56.17:5601)
+
+### 1.12、安装 ik 分词器
+
+```bash
+# 进入 elasticsearch 插件目录
+cd /usr/local/src/elasticsearch/plugins/
+
+# 下载对应版本的 ik 分词器压缩包
+yum install wget -y
+wget https://github.com/medcl/elasticsearch-analysis-ik/releases/download/v7.4.2/elasticsearch-analysis-ik-7.4.2.zip
+
+# 解压
+yum install unzip -y
+unzip elasticsearch-analysis-ik-7.4.2.zip
+rm -rf *.zip
+
+# 移至 ik 目录下并赋权限
+mkdir ik
+mv * ik/
+chmod -R 777 ik/
+
+# 以交互模式进入 elasticsearch 容器的命令行中
+docker exec -it elasticsearch /bin/bash
+
+# 运行 elasticsearch-plugin
+cd /bin
+elasticsearch-plugin
+
+# 查看插件是否已安装
+elasticsearch-plugin list
+
+# 重启 elasticsearch 容器
+exit;
+docker restart elasticsearch
+```
+
+测试
+
+```bash
+POST _analyze
+{
+  "analyzer": "ik_smart", 
+  "text": "我是中国人"
+}
+```
+
+### 1.13、安装 MongoDB
+
+```bash
+docker pull mongo
+
+docker run -di \
+--name mongo-service \
+--restart=always \
+-p 27017:27017 \
+-v ~/data/mongodata:/data \
+mongo
+```
+
+
+
+## 2、ES
+
+### 2.1、创建索引和映射
+
+```bash
+PUT app_info_article
+{
+    "mappings":{
+        "properties":{
+            "id":{
+                "type":"long"
+            },
+            "publishTime":{
+                "type":"date"
+            },
+            "layout":{
+                "type":"integer"
+            },
+            "images":{
+                "type":"keyword",
+                "index": false
+            },
+            "staticUrl":{
+                "type":"keyword",
+                "index": false
+            },
+            "authorId": {
+                "type": "long"
+            },
+            "authorName": {
+                "type": "text"
+            },
+            "title":{
+                "type":"text",
+                "analyzer":"ik_smart"
+            },
+            "content":{
+                "type":"text",
+                "analyzer":"ik_smart"
+            }
+        }
+    }
+}
+```
+
+### 2.2、查询映射
+
+```bash
+GET app_info_article
+```
+
+### 2.3、删除映射
+
+```bash
+DELETE app_info_article
+```
+
+### 2.4、查询文档
+
+```
+GET app_info_article/_search
+```
+

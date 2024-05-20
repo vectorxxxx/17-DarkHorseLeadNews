@@ -17,7 +17,7 @@ public class WmTokenInterceptor implements HandlerInterceptor
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
         // 得到header中的信息
         final String userId = request.getHeader("userId");
-        log.info("userId:{}", request.getHeader("userID"));
+        log.info("userId:{}", request.getHeader("userId"));
         Optional<String> optional = Optional.ofNullable(userId);
         if (optional.isPresent()) {
             // 把用户id存入threadloacl中
