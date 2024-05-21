@@ -18,14 +18,16 @@ import java.util.Date;
  */
 @Data
 @TableName("wm_user")
-public class WmUser implements Serializable {
+public class WmUser implements Serializable
+{
 
     private static final long serialVersionUID = 1L;
 
     /**
      * 主键
      */
-    @TableId(value = "id", type = IdType.AUTO)
+    @TableId(value = "id",
+             type = IdType.AUTO)
     private Integer id;
 
     @TableField("ap_user_id")
@@ -77,10 +79,7 @@ public class WmUser implements Serializable {
     private String phone;
 
     /**
-     * 状态
-            0 暂时不可用
-            1 永久不可用
-            9 正常可用
+     * 状态 0 暂时不可用 1 永久不可用 9 正常可用
      */
     @TableField("status")
     private Integer status;
@@ -92,10 +91,7 @@ public class WmUser implements Serializable {
     private String email;
 
     /**
-     * 账号类型
-            0 个人 
-            1 企业
-            2 子账号
+     * 账号类型 0 个人 1 企业 2 子账号
      */
     @TableField("type")
     private Integer type;

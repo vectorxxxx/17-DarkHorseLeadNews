@@ -1,10 +1,12 @@
 package com.heima.es.pojo;
 
 import lombok.Data;
+
 import java.util.Date;
 
 @Data
-public class SearchArticleVo {
+public class SearchArticleVo
+{
 
     // 文章id
     private Long id;

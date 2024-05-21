@@ -1,6 +1,7 @@
 package com.heima.kafka.pojo;
 
-public class User {
+public class User
+{
 
     private String username;
     private Integer age;
@@ -23,9 +24,6 @@ public class User {
 
     @Override
     public String toString() {
-        return "User{" +
-                "username='" + username + '\'' +
-                ", age=" + age +
-                '}';
+        return "User{" + "username='" + username + '\'' + ", age=" + age + '}';
     }
 }

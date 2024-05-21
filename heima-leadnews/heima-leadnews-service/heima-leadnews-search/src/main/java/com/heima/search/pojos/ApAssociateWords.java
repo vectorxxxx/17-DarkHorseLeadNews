@@ -15,7 +15,8 @@ import java.util.Date;
  */
 @Data
 @Document("ap_associate_words")
-public class ApAssociateWords implements Serializable {
+public class ApAssociateWords implements Serializable
+{
 
     private static final long serialVersionUID = 1L;
 

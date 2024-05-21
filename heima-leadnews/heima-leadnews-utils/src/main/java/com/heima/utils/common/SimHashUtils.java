@@ -171,10 +171,10 @@ public class SimHashUtils
     public static void main(String[] args) {
 
         String s1 = "....";
-        String s2 = "最近公司由于业务拓展，需要进行小程序相关的开发，本着朝全栈开发者努力，决定学习下Vue，去年csdn送了一本《Vue.js权威指南》，那就从这本书开始练起来吧。哟吼。一，环境搭建\n" + "今天主要说一下如何搭建环境，以及如何运行。1,npm安装\n" + "brew install npm\n" + "1" +
-                "\n" + "如果brew没有安装的话，大家可以brew如何安装哦，这里就不再详细说明了。本来是有一个Vue的图标的，被我给去掉了，方便后面的调试。\n" + "\n" + "三，Vue.js 权威指南的第一个demo\n" + "一切准备就绪，接下来我们开始练习《Vue" +
-                ".js权威指南》这本书中的demo，在网上找了许久，也没有找到书中的源码，很是遗憾啊。第一个demo的代码保存为jk.vue \n" + "我这边将第一个demo的代码如下：\n" + "--------------------- \n" + "作者：JackLee18 \n" + "来源：CSDN \n" +
-                "原文：https://blog.csdn.net/hanhailong18/article/details/81509952 \n" + "版权声明：本文为博主原创文章，转载请附上博文链接！";
+        String s2 =
+                "最近公司由于业务拓展，需要进行小程序相关的开发，本着朝全栈开发者努力，决定学习下Vue，去年csdn送了一本《Vue.js权威指南》，那就从这本书开始练起来吧。哟吼。一，环境搭建\n" + "今天主要说一下如何搭建环境，以及如何运行。1,npm安装\n" + "brew install npm\n" + "1" +
+                        "\n" + "如果brew没有安装的话，大家可以brew如何安装哦，这里就不再详细说明了。本来是有一个Vue的图标的，被我给去掉了，方便后面的调试。\n" + "\n" + "三，Vue.js 权威指南的第一个demo\n" + "一切准备就绪，接下来我们开始练习《Vue" + ".js" +
+                        "权威指南》这本书中的demo，在网上找了许久，也没有找到书中的源码，很是遗憾啊。第一个demo的代码保存为jk.vue \n" + "我这边将第一个demo的代码如下：\n" + "--------------------- \n" + "作者：JackLee18 \n" + "来源：CSDN \n" + "原文：https://blog.csdn.net/hanhailong18/article/details/81509952 \n" + "版权声明：本文为博主原创文章，转载请附上博文链接！";
 
         double semblance = getSemblance(s1, s2);
         System.out.println(semblance);

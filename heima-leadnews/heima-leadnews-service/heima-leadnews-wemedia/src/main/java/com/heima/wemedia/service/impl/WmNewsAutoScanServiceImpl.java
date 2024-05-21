@@ -148,7 +148,8 @@ public class WmNewsAutoScanServiceImpl implements WmNewsAutoScanService
      *
      * @param wmNews
      */
-    private ResponseResult saveAppArticle(WmNews wmNews) {
+    @Override
+    public ResponseResult saveAppArticle(WmNews wmNews) {
 
         ArticleDto dto = new ArticleDto();
         // 属性的拷贝

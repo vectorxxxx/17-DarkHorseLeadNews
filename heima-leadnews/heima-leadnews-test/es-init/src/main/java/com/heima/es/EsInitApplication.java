@@ -10,7 +10,8 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
  */
 @SpringBootApplication
 @MapperScan("com.heima.es.mapper")
-public class EsInitApplication {
+public class EsInitApplication
+{
 
     public static void main(String[] args) {
         SpringApplication.run(EsInitApplication.class, args);

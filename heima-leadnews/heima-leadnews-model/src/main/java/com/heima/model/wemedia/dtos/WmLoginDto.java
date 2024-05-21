@@ -1,10 +1,10 @@
 package com.heima.model.wemedia.dtos;
 
-
 import lombok.Data;
 
 @Data
-public class WmLoginDto {
+public class WmLoginDto
+{
 
     /**
      * 用户名

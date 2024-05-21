@@ -11,13 +11,16 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/login")
-public class LoginController {
+public class LoginController
+{
 
     @Autowired
     private WmUserService wmUserService;
 
     @PostMapping("/in")
-    public ResponseResult login(@RequestBody WmLoginDto dto){
+    public ResponseResult login(
+            @RequestBody
+                    WmLoginDto dto) {
         return wmUserService.login(dto);
     }
 }

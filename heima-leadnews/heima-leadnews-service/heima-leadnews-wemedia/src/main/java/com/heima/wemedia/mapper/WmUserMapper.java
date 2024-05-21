@@ -5,5 +5,5 @@ import com.heima.model.wemedia.pojos.WmUser;
 import org.apache.ibatis.annotations.Mapper;
 
 @Mapper
-public interface WmUserMapper extends BaseMapper<WmUser> {
-}
+public interface WmUserMapper extends BaseMapper<WmUser>
+{}
