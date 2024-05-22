@@ -9,15 +9,11 @@ import com.heima.model.user.pojos.ApUser;
 import com.heima.user.service.ApUserRelationService;
 import com.heima.utils.thread.AppThreadLocalUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
 
 @Service
 public class ApUserRelationServiceImpl implements ApUserRelationService
 {
-
-    @Autowired
-    RedisTemplate redisTemplate;
 
     @Autowired
     private CacheService cacheService;

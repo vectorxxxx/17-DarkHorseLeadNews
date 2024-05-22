@@ -67,7 +67,7 @@ public class ApArticleServiceImpl extends ServiceImpl<ApArticleMapper, ApArticle
         if (size == null || size == 0) {
             size = 10;
         }
-        size = Math.max(size, MAX_PAGE_SIZE);
+        size = Math.min(size, MAX_PAGE_SIZE);
         dto.setSize(size);
 
         // 类型参数检验
