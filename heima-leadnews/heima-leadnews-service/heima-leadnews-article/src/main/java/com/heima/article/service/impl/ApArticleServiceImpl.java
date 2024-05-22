@@ -1,5 +1,6 @@
 package com.heima.article.service.impl;
 
+import com.alibaba.fastjson.JSONObject;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.heima.article.mapper.ApArticleConfigMapper;
@@ -93,6 +94,19 @@ public class ApArticleServiceImpl extends ServiceImpl<ApArticleMapper, ApArticle
 
         // 3.结果封装
         return ResponseResult.okResult(apArticles);
+    }
+
+    @Override
+    public ResponseResult load2(ArticleHomeDto dto, Short type, boolean firstPage) {
+        if (firstPage) {
+            final String jsonStr = cacheService.get(ArticleConstants.HOT_ARTICLE_FIRST_PAGE + dto.getTag());
+            if (StringUtils.isNotBlank(jsonStr)) {
+                final List<ApArticle> apArticleList = JSONObject.parseArray(jsonStr, ApArticle.class);
+                return ResponseResult.okResult(apArticleList);
+            }
+        }
+
+        return load(type, dto);
     }
 
     /**

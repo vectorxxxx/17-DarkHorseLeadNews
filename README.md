@@ -412,7 +412,30 @@ docker run -di \
 mongo
 ```
 
+### 1.14、安装 XXL-JOB
 
+```bash
+docker pull xuxueli/xxl-job-admin:2.3.1
+
+docker run \
+-e PARAMS="--spring.datasource.url=jdbc:mysql://mysql:3306/xxl_job \
+?useUnicode=true&characterEncoding=UTF-8&autoReconnect=true&serverTimezone=Asia/Shanghai \
+--spring.datasource.username=root \
+--spring.datasource.password=root" \
+--link mysql:mysql \
+-p 8080:8080 \
+-v /usr/local/src/xxl-job/tmp:/data/applogs \
+--name xxl-job-admin \
+--restart=always \
+-d xuxueli/xxl-job-admin:2.3.1
+```
+
+访问: [http://192.168.56.17:8080/xxl-job-admin](http://192.168.56.17:8080/xxl-job-admin)
+
+- 账号：admin
+- 密码：123456
+
+### 
 
 ## 2、ES
 
