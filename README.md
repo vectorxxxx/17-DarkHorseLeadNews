@@ -289,7 +289,9 @@ zookeeper:3.4.14
 ```bash
 docker pull wurstmeister/kafka:2.12-2.3.1
 
-docker run -d --name kafka \
+docker run -d \
+--name kafka \
+--restart=always \
 -p 9092:9092 \
 --env KAFKA_ADVERTISED_HOST_NAME=192.168.56.17 \
 --env KAFKA_ZOOKEEPER_CONNECT=192.168.56.17:2181 \
@@ -435,7 +437,60 @@ docker run \
 - 账号：admin
 - 密码：123456
 
-### 
+### 1.17、安装 JDK
+
+```bash
+wget https://repo.huaweicloud.com/java/jdk/8u202-b08/jdk-8u202-linux-x64.tar.gz
+
+tar -zxvf 
+
+vi /etc/profile
+#java
+export JAVA_HOME=/usr/local/src/jdk
+export PATH=$JAVA_HOME/bin:$PATH
+export CLASSPATH=.:$JAVA_HOME/lib/dt.jar:$JAVA_HOME/lib
+
+source /etc/profile
+
+ln -s /usr/local/src/jdk/bin/java /usr/bin/java
+
+java -version
+```
+
+### 1.16、安装 Jenkins
+
+```bash
+wget https://pkg.jenkins.io/redhat-stable/jenkins-2.190.1-1.1.noarch.rpm --no-check-certificate
+rpm -ivh jenkins-2.190.1-1.1.noarch.rpm
+
+vi /etc/sysconfig/jenkins
+# 修改为对应的目标用户， 这里使用的是root
+$JENKINS_USER="root"
+# 服务监听端口
+JENKINS_PORT="16060"
+
+chown -R root:root /var/lib/jenkins
+chown -R root:root /var/cache/jenkins
+chown -R root:root /var/log/jenkins
+
+systemctl restart jenkins
+
+# 查看管理密码
+cat /var/lib/jenkins/secrets/initialAdminPassword
+
+# 更换插件地址
+cd /var/lib/jenkins/updates
+mv default.json default.json.bak
+wget https://mirrors.tuna.tsinghua.edu.cn/jenkins/updates/dynamic-stable-2.190.1/update-center.json --no-check-certificate
+mv update-center.json default.json
+sed -i 's#www.google.com#www.baidu.com#g' default.json && sed -i 's#updates.jenkins.io/download/plugins#mirrors.tuna.tsinghua.edu.cn/jenkins/plugins#g' default.json
+# 进入插件管理中心->高级设置
+https://mirrors.tuna.tsinghua.edu.cn/jenkins/updates/update-center.json
+```
+
+访问：[http://192.168.56.17:16060/](http://192.168.56.17:16060/)
+
+
 
 ## 2、ES
 
