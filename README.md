@@ -1,3 +1,9 @@
+## 0、Demo效果
+
+![image-20240523195436460](C:\Users\uxiah\AppData\Roaming\Typora\typora-user-images\image-20240523195436460.png)
+
+
+
 ## 1、环境搭建
 
 ### 1.1、安装 linux
@@ -486,6 +492,10 @@ mv update-center.json default.json
 sed -i 's#www.google.com#www.baidu.com#g' default.json && sed -i 's#updates.jenkins.io/download/plugins#mirrors.tuna.tsinghua.edu.cn/jenkins/plugins#g' default.json
 # 进入插件管理中心->高级设置
 https://mirrors.tuna.tsinghua.edu.cn/jenkins/updates/update-center.json
+
+# 卸载
+rpm -e --nodeps jenkins-2.190.1-1.1.noarch
+find / -iname jenkins | xargs -n 1000 rm -rf
 ```
 
 访问：[http://192.168.56.17:16060/](http://192.168.56.17:16060/)
