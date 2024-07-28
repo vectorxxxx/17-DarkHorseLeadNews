@@ -1,6 +1,6 @@
 ## 0、Demo效果
 
-![image-20240523195436460](C:\Users\uxiah\AppData\Roaming\Typora\typora-user-images\image-20240523195436460.png)
+![image-20240523195436460](README.assets/image-20240523195436460.png)
 
 
 
